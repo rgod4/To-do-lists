@@ -1,0 +1,55 @@
+<%- include("header") -%>
+    <nav>
+        <ul class="navbar">
+            <%  listnames.forEach((item,index)=>{  %>
+                <a href="<%=index%>" class="link redlinks"><li><%=item%></li></a>
+            <%  })  %>
+                <a href="/newlist" class="link"><li>New List</li></a>
+        </ul>
+    </nav>
+    <div class="box">
+        <div class="heading">
+            <h1><%=day%></h1>
+        </div>
+        <% if(currlist != "initial"){ %>
+        <div class="heading">
+            <h1><%=currlist%></h1>
+        </div>
+        <ul>
+            <% if(items.length > 0){ %>
+            <%  items.forEach((item,index)=>{  %>
+                <li>
+                    <div class="item">
+                        <p><%=item%></p>
+                        <div class="delbutton">
+                            <form action="/remove" method="POST">
+                                <button type="submit" name="btn" value="<%=index%>"><img src="https://img.icons8.com/material-rounded/24/000000/filled-trash.png" alt="remove"></button>
+                            </form>
+                        </div>
+                    </div>
+                </li>
+            <%  })  %>
+            <%  }  %>
+        </ul>
+        <form action="/add" method="POST">
+            <div class="addbox">
+                <div>
+                    <input type="text" name="task" placeholder="Add Task" autofocus autocomplete="off">
+                </div>
+                <div id="addbtn">
+                    <button type="submit" id="add" name="button" value="1"><img src="https://img.icons8.com/metro/26/000000/plus-math.png" alt="Add"></button>
+                </div>
+            </div>
+        </form>
+        <%  }  %>
+        <%  if(listnames.length>0){ %>
+        <div>
+            <form action="/deletelist" method="POST">
+                <div id="addbtn">
+                    <button type="submit" id="delist" name="btn">Delete this List</button>
+                </div>
+            </form>
+        </div>
+        <%  }  %>
+    </div>
+<%-include("footer")-%>    
